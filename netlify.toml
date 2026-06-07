@@ -1,6 +1,20 @@
 [build]
   publish = "."
 
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
 [[redirects]]
   from = "/*"
   to = "/DR_RENT_CAR_COMPLETO.html"
