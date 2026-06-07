@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/DR_RENT_CAR_COMPLETO.html"
+  status = 200
