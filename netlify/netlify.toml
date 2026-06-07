@@ -1,6 +1,6 @@
 [build]
-  command = "echo 'Build complete'"
-  functions = "functions"
+  command = "npm install --legacy-peer-deps"
+  functions = "netlify/functions"
   publish = "."
 
 [[redirects]]
