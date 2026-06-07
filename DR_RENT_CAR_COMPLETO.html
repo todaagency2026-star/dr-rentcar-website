@@ -2422,7 +2422,7 @@ footer {
       </div>
 
       <!-- Form preventivo -->
-      <form class="contatti-form reveal-right" id="preventivo-form">
+      <form class="contatti-form reveal-right" id="preventivo-form" action="https://formspree.io/f/mdavewyo" method="POST">
         <div class="form-title">Richiedi un preventivo</div>
         <div class="form-subtitle">Compila il modulo — ti rispondiamo entro poche ore.</div>
 
@@ -2697,7 +2697,7 @@ window.addEventListener('scroll', () => {
 </script>
 
 <script>
-// ── Gestione Form Preventivo (Netlify Functions) ──
+// ── Gestione Form Preventivo (Formspree) ──
 (function() {
   const form = document.getElementById('preventivo-form');
   if (!form) return;
@@ -2711,63 +2711,62 @@ window.addEventListener('scroll', () => {
     // Disabilita il bottone durante l'invio
     submitBtn.disabled = true;
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Invio in corso...';
+    submitBtn.textContent = '✨ Invio in corso...';
+    submitBtn.style.opacity = '0.7';
 
     // Raccogli i dati del form
-    const formData = {
-      nome: form.querySelector('input[name="nome"]').value,
-      cognome: form.querySelector('input[name="cognome"]').value,
-      email: form.querySelector('input[name="email"]').value,
-      telefono: form.querySelector('input[name="telefono"]').value,
-      servizio: form.querySelector('select[name="servizio"]').value,
-      messaggio: form.querySelector('textarea[name="messaggio"]').value
-    };
+    const formData = new FormData(form);
 
     try {
-      // Invia i dati alla Netlify Function
-      const response = await fetch('/.netlify/functions/send-email', {
+      // Invia i dati a Formspree
+      const response = await fetch(form.action, {
         method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+          'Accept': 'application/json'
+        }
       });
 
-      const data = await response.json();
-
-      // Mostra il messaggio appropriato
-      messageDiv.style.display = 'block';
-
-      if (data.success) {
-        messageDiv.style.background = 'linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05))';
-        messageDiv.style.border = '2px solid rgba(76, 175, 80, 0.5)';
+      if (response.ok) {
+        // Successo!
+        messageDiv.style.display = 'block';
+        messageDiv.style.background = 'linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.08))';
+        messageDiv.style.border = '2px solid rgba(76, 175, 80, 0.6)';
         messageDiv.style.color = 'rgba(76, 175, 80, 1)';
-        messageDiv.textContent = '✓ ' + data.message;
+        messageDiv.style.animation = 'fadeInUp 0.6s ease-out';
+        messageDiv.innerHTML = '<strong>✓ Richiesta inviata con successo!</strong><br>Ti contatteremo entro 2 ore. Grazie!';
 
         // Resetta il form
         form.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.style.opacity = '1';
 
-        // Nascondi il messaggio dopo 5 secondi
+        // Nascondi il messaggio dopo 6 secondi
         setTimeout(() => {
           messageDiv.style.display = 'none';
-        }, 5000);
+        }, 6000);
       } else {
-        messageDiv.style.background = 'linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.05))';
-        messageDiv.style.border = '2px solid rgba(244, 67, 54, 0.5)';
+        // Errore
+        messageDiv.style.display = 'block';
+        messageDiv.style.background = 'linear-gradient(135deg, rgba(244, 67, 54, 0.15), rgba(244, 67, 54, 0.08))';
+        messageDiv.style.border = '2px solid rgba(244, 67, 54, 0.6)';
         messageDiv.style.color = 'rgba(244, 67, 54, 1)';
-        messageDiv.textContent = '✗ ' + data.message;
+        messageDiv.innerHTML = '<strong>✗ Errore durante l\'invio</strong><br>Riprova più tardi o contattaci via WhatsApp';
+        submitBtn.textContent = originalText;
+        submitBtn.style.opacity = '1';
       }
     } catch (error) {
       console.error('Errore:', error);
       messageDiv.style.display = 'block';
-      messageDiv.style.background = 'linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.05))';
-      messageDiv.style.border = '2px solid rgba(244, 67, 54, 0.5)';
+      messageDiv.style.background = 'linear-gradient(135deg, rgba(244, 67, 54, 0.15), rgba(244, 67, 54, 0.08))';
+      messageDiv.style.border = '2px solid rgba(244, 67, 54, 0.6)';
       messageDiv.style.color = 'rgba(244, 67, 54, 1)';
-      messageDiv.textContent = '✗ Si è verificato un errore. Riprova più tardi.';
+      messageDiv.innerHTML = '<strong>✗ Si è verificato un errore</strong><br>Contattaci via WhatsApp: +39 351 160 0532';
+      submitBtn.textContent = originalText;
+      submitBtn.style.opacity = '1';
     } finally {
       // Ripristina il bottone
       submitBtn.disabled = false;
-      submitBtn.textContent = originalText;
     }
   });
 })();
