@@ -1826,17 +1826,67 @@ footer {
   .stat-box-large { flex-direction: column; text-align: center; gap: 0.5rem;}
 }
 
-@media (max-width: 600px) {
-  .hero-h1 { font-size: 3rem; }
-  .hero-visual { display: none; } /* Troppo ingombrante su schermi piccolissimi */
-  .hero-stats { grid-template-columns: 1fr; }
-  .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+@media (max-width: 768px) {
+  /* Stabilizzazione generale */
+  body { overflow-x: hidden; }
+  * { box-sizing: border-box; }
+
+  /* Hero */
+  .hero { padding: 80px 20px 60px; }
+  .hero-content { padding: 0; }
+  .hero-h1 { font-size: 2.2rem; line-height: 1.3; margin-bottom: 1.5rem; }
+  .hero-desc { font-size: 0.95rem; margin-bottom: 2rem; }
+  .hero-buttons { flex-wrap: wrap; gap: 1rem; }
+  .hero-button { padding: 0.9rem 1.8rem; font-size: 0.9rem; flex: 1; min-width: 140px; }
+  .hero-visual { display: none; }
+
+  /* Stats */
+  .hero-stats { grid-template-columns: 1fr; padding: 0; margin-top: 2rem; }
+  .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 0; }
   .hero-stat:last-child { border-bottom: none; }
-  .perche-grid { grid-template-columns: 1fr; }
+
+  /* Navigation */
+  .nav-center .nav-logo-text { font-size: 1.3rem; }
+  .nav-links { display: none; }
+
+  /* Sections */
+  .section { padding: 60px 20px; }
+  .section-title { font-size: 1.8rem; margin-bottom: 1rem; }
+  .section-label { font-size: 0.8rem; }
+  .container { max-width: 100%; }
+
+  /* Grids */
+  .perche-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .form-row { grid-template-columns: 1fr; }
-  .section-title { font-size: 2.2rem; }
-  .servizio-card { padding: 2rem; }
-  .nav-center .nav-logo-text { font-size: 1.5rem; }
+  .social-grid { grid-template-columns: 1fr; max-width: 100%; }
+  .servizi-list { grid-template-columns: 1fr; }
+
+  /* Cards */
+  .servizio-card { padding: 1.5rem; }
+  .perche-card { padding: 1.5rem; }
+  .social-card { padding: 2rem 1.5rem; }
+
+  /* Form */
+  .form-group { margin-bottom: 1.2rem; }
+  .contatti-form { padding: 2rem 1.5rem; }
+  .form-title { font-size: 1.5rem; }
+
+  /* Contatti */
+  .contatti-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .footer-copy { margin-bottom: 1rem; }
+
+  /* Fixed elements */
+  .back-top { bottom: 1.5rem; right: 1.5rem; width: 44px; height: 44px; }
+  .whatsapp-float { bottom: 1.5rem; left: 1.5rem; padding: 0.8rem 1rem; font-size: 0.8rem; }
+  .whatsapp-float svg { width: 1.2rem; height: 1.2rem; }
+
+  /* Prevent layout shift */
+  .hero-car-slideshow { min-height: 300px; }
+  .contatti-link { padding: 1rem; }
 }
 
 /* ═══════════════════════════════════════════
