@@ -1,9 +1,0 @@
-{
-  "name": "dr-rentcar-website",
-  "version": "1.0.0",
-  "description": "Dr. Rent Car - Noleggio e Vendita Auto a Cusano Milanino",
-  "main": "DR_RENT_CAR_COMPLETO.html",
-  "scripts": {
-    "build": "echo 'Building Dr. Rent Car website...'"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "name": "dr-rentcar-functions",
-  "version": "1.0.0",
-  "description": "Netlify Functions for Dr. Rent Car email handling",
-  "dependencies": {
-    "@sendgrid/mail": "^7.7.0"
-  }
-}
