@@ -2051,6 +2051,30 @@ footer {
 }
 .navbar.scrolled .nav-logo-img { height: 56px; }
 
+.partner-badge {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  aspect-ratio: 3/2;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+}
+
+.partner-badge:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(208, 2, 27, 0.15);
+}
+
+.partner-badge img {
+  max-width: 90%;
+  height: auto;
+  object-fit: contain;
+}
+
 </style>
 
 <!-- Google Analytics -->
