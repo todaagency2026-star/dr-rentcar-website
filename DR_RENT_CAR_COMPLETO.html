@@ -2301,6 +2301,85 @@ footer {
     pointer-events: auto !important;
   }
 }
+
+/* MOBILE PARTNER BADGES - ENLARGED */
+@media (max-width: 768px) {
+  #partner > div > div {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .partner-badge {
+    height: auto !important;
+    aspect-ratio: 16/8 !important;
+    width: 100%;
+    max-width: 100%;
+    min-height: 280px;
+  }
+  
+  .partner-badge img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .partner-badge {
+    aspect-ratio: 16/8 !important;
+    min-height: 240px;
+  }
+  
+  #partner > div > div {
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-badge {
+    aspect-ratio: 16/8 !important;
+    min-height: 200px;
+  }
+  
+  #partner > div > div {
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+}
+
+/* LOGO IN HERO PAGE - MOBILE */
+@media (max-width: 768px) {
+  .navbar {
+    background: transparent !important;
+    border-bottom: none !important;
+  }
+  
+  .navbar .nav-logo-img {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: block !important;
+  }
+  
+  .navbar.scrolled {
+    background: var(--dark) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+  }
+  
+  .navbar.scrolled .nav-logo-img {
+    opacity: 1 !important;
+  }
+  
+  .hero .navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+}
 </style>
 
 <!-- Google Analytics -->
