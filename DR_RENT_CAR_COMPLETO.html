@@ -2197,6 +2197,48 @@ footer {
     height: 200px !important;
   }
 }
+
+/* MOBILE LOGO BEHAVIOR - ONLY IN HERO */
+@media (max-width: 768px) {
+  .navbar.scrolled .nav-logo {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  
+  .navbar .nav-logo-img {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  .navbar.scrolled .nav-logo-img {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  
+  /* Partner Badge Image Sizing - Full Coverage */
+  .partner-badge img {
+    width: 110% !important;
+    height: 110% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .partner-badge img {
+    width: 110% !important;
+    height: 110% !important;
+    object-fit: cover !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-badge img {
+    width: 110% !important;
+    height: 110% !important;
+    object-fit: cover !important;
+  }
+}
 </style>
 
 <!-- Google Analytics -->
