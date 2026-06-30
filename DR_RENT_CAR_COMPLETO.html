@@ -2309,7 +2309,6 @@ footer {
 
 
 
-
 /* MOBILE PARTNER BADGES - HORIZONTAL RECTANGLES - ENLARGED */
 @media (max-width: 768px) {
   #partner {
@@ -2319,17 +2318,15 @@ footer {
   #partner > div {
     padding: 0;
     overflow: visible;
-    display: flex;
-    justify-content: center;
   }
   
   #partner > div > div {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    max-width: 500px;
+    max-width: 100%;
     padding: 0;
-    margin: 0 auto;
-    width: 90%;
+    margin: 0 -20px;
+    width: calc(100% + 40px);
   }
   
   .partner-badge {
@@ -2338,6 +2335,7 @@ footer {
     width: 100%;
     max-width: 100%;
     min-height: 140px;
+    margin: 0 20px;
   }
   
   .partner-badge img {
@@ -2356,14 +2354,14 @@ footer {
   #partner > div > div {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    max-width: 450px;
-    width: 90%;
-    margin: 0 auto;
+    margin: 0 -15px;
+    width: calc(100% + 30px);
   }
   
   .partner-badge {
     aspect-ratio: 2/1 !important;
     min-height: 130px;
+    margin: 0 15px;
   }
 }
 
@@ -2375,14 +2373,14 @@ footer {
   #partner > div > div {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    max-width: 380px;
-    width: 90%;
-    margin: 0 auto;
+    margin: 0 -10px;
+    width: calc(100% + 20px);
   }
   
   .partner-badge {
     aspect-ratio: 2/1 !important;
     min-height: 120px;
+    margin: 0 10px;
   }
 }
 
