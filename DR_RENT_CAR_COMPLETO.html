@@ -2239,6 +2239,68 @@ footer {
     object-fit: cover !important;
   }
 }
+
+/* MOBILE PARTNER BADGES - HORIZONTAL RECTANGLES */
+@media (max-width: 768px) {
+  #partner > div > div {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 100%;
+  }
+  
+  .partner-badge {
+    height: auto !important;
+    aspect-ratio: 16/9 !important;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .partner-badge img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .partner-badge {
+    aspect-ratio: 16/9 !important;
+    max-width: 100%;
+  }
+  
+  #partner > div > div {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-badge {
+    aspect-ratio: 16/9 !important;
+  }
+  
+  #partner > div > div {
+    gap: 1.2rem;
+  }
+}
+
+/* MOBILE LOGO IN HERO - ALWAYS VISIBLE */
+@media (max-width: 768px) {
+  .hero .nav-logo-img {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  
+  .navbar .nav-logo-img {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  .navbar.scrolled .nav-logo-img {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
 </style>
 
 <!-- Google Analytics -->
