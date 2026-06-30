@@ -2167,6 +2167,36 @@ footer {
     padding: 3rem 1rem;
   }
 }
+
+/* MOBILE NAVBAR AND PARTNER FIX */
+@media (max-width: 768px) {
+  .navbar {
+    position: relative !important;
+  }
+  
+  .navbar.scrolled {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  
+  .partner-badge {
+    height: 250px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .partner-badge {
+    height: 220px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-badge {
+    height: 200px !important;
+  }
+}
 </style>
 
 <!-- Google Analytics -->
