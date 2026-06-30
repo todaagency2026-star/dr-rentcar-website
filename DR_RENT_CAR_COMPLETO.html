@@ -2306,13 +2306,23 @@ footer {
 
 
 
+
 /* MOBILE PARTNER BADGES - HORIZONTAL RECTANGLES - ENLARGED */
 @media (max-width: 768px) {
+  #partner {
+    padding: 4rem 0;
+  }
+  
+  #partner > div {
+    padding: 0;
+  }
+  
   #partner > div > div {
     grid-template-columns: 1fr;
     gap: 2.5rem;
     max-width: 100%;
-    padding: 0 0.2rem;
+    padding: 0;
+    margin: 0;
   }
   
   .partner-badge {
@@ -2332,32 +2342,44 @@ footer {
 }
 
 @media (max-width: 600px) {
+  #partner {
+    padding: 3rem 0;
+  }
+  
+  #partner > div {
+    padding: 0;
+  }
+  
   #partner > div > div {
-    padding: 0 0.1rem;
+    padding: 0;
+    margin: 0;
+    gap: 2rem;
   }
   
   .partner-badge {
     aspect-ratio: 3/1 !important;
     min-height: 160px;
   }
-  
-  #partner > div > div {
-    gap: 2rem;
-  }
 }
 
 @media (max-width: 480px) {
+  #partner {
+    padding: 2.5rem 0;
+  }
+  
+  #partner > div {
+    padding: 0;
+  }
+  
   #partner > div > div {
     padding: 0;
+    margin: 0;
+    gap: 1.5rem;
   }
   
   .partner-badge {
     aspect-ratio: 3/1 !important;
     min-height: 150px;
-  }
-  
-  #partner > div > div {
-    gap: 1.5rem;
   }
 }
 
