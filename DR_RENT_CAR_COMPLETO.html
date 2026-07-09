@@ -2840,10 +2840,10 @@ footer {
 
     <!-- Carousel container -->
     <div style="position:relative;width:100%;">
-      <div id="offerte-carousel" style="position:relative;width:100%;overflow:hidden;border-radius:20px;background:linear-gradient(135deg, rgba(208,2,27,0.1) 0%, rgba(14,67,148,0.1) 100%);padding:30px 70px;backdrop-filter:blur(10px);">
+      <div id="offerte-carousel" style="position:relative;width:100%;overflow:hidden;border-radius:20px;background:linear-gradient(135deg, rgba(208,2,27,0.1) 0%, rgba(14,67,148,0.1) 100%);padding:30px 60px;backdrop-filter:blur(10px);">
 
         <!-- Track -->
-        <div id="offerte-track" style="display:flex;gap:28px;overflow-x:auto;scroll-behavior:smooth;padding:20px 0;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;">
+        <div id="offerte-track" style="display:flex;gap:24px;overflow-x:auto;scroll-behavior:smooth;padding:12px 0;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;">
           <!-- Immagini caricate via JS -->
         </div>
       </div>
@@ -2941,59 +2941,24 @@ footer {
     }
 
     @media(max-width:768px) {
-      #offerte { padding:3rem 1.5rem; }
-
-      #offerte-carousel {
-        padding:20px 50px !important;
-        border-radius:16px;
-      }
-
-      #offerte-track {
-        gap:16px;
-        padding:15px 0;
-      }
-
-      .offerta-card {
-        width:clamp(240px,85vw,320px);
-        height:360px;
-        border-radius:14px;
-      }
-
-      .offerta-card img {
-        padding:15px;
-      }
-
-      #offerte-prev, #offerte-next {
-        width:44px;
-        height:44px;
-        font-size:1.1rem;
-        left:8px;
-        right:8px;
-      }
-
-      #offerte-next { right:8px; }
-
-      .section-title { font-size:1.8rem; margin-bottom:2rem; }
-
-      #offerte-dots { gap:8px; margin-top:1.5rem; }
-    }
-
-    @media(max-width:480px) {
       #offerte { padding:2.5rem 1rem; }
 
       #offerte-carousel {
-        padding:15px 40px !important;
+        padding:20px 30px !important;
+        border-radius:14px;
       }
 
       #offerte-track {
-        gap:12px;
-        padding:12px 0;
+        gap:12px !important;
+        padding:10px 0 !important;
       }
 
       .offerta-card {
-        width:clamp(200px,90vw,280px);
-        height:320px;
+        width:calc(100vw - 120px);
+        max-width:300px;
+        height:340px;
         border-radius:12px;
+        flex-basis:auto;
       }
 
       .offerta-card img {
@@ -3001,19 +2966,57 @@ footer {
       }
 
       #offerte-prev, #offerte-next {
-        width:40px;
-        height:40px;
-        font-size:1rem;
+        width:40px !important;
+        height:40px !important;
+        font-size:0.9rem !important;
       }
 
-      .section-title { font-size:1.5rem; margin-bottom:1.5rem; }
-
-      .offerte-dot {
-        width:10px;
-        height:10px;
-      }
+      .section-title { font-size:1.6rem; margin-bottom:1.5rem; }
 
       #offerte-dots { gap:6px; margin-top:1.2rem; }
+    }
+
+    @media(max-width:480px) {
+      #offerte { padding:2rem 0.75rem; }
+
+      #offerte-carousel {
+        padding:15px 20px !important;
+        border-radius:12px;
+      }
+
+      #offerte-track {
+        gap:10px !important;
+        padding:8px 0 !important;
+      }
+
+      .offerta-card {
+        width:calc(100vw - 80px);
+        max-width:280px;
+        height:320px;
+        border-radius:10px;
+        flex-basis:auto;
+      }
+
+      .offerta-card img {
+        padding:10px;
+      }
+
+      #offerte-prev, #offerte-next {
+        width:36px !important;
+        height:36px !important;
+        font-size:0.8rem !important;
+        left:4px !important;
+        right:4px !important;
+      }
+
+      .section-title { font-size:1.4rem; margin-bottom:1.2rem; }
+
+      .offerte-dot {
+        width:8px;
+        height:8px;
+      }
+
+      #offerte-dots { gap:5px; margin-top:1rem; }
     }
   </style>
 </section>
