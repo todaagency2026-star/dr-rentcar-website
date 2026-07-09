@@ -2891,10 +2891,21 @@ footer {
       }
     }
 
+    @keyframes float {
+      0%, 100% {
+        transform:translateY(-15px) rotateZ(0.5deg);
+        box-shadow:0 20px 60px rgba(208,2,27,0.4);
+      }
+      50% {
+        transform:translateY(-25px) rotateZ(-0.5deg);
+        box-shadow:0 30px 80px rgba(208,2,27,0.6);
+      }
+    }
+
     .offerta-card:hover {
-      transform:translateY(-15px);
-      box-shadow:0 20px 60px rgba(208,2,27,0.4);
-      border-color:rgba(208,2,27,0.6);
+      animation:float 3s ease-in-out infinite;
+      border-color:rgba(208,2,27,0.8);
+      perspective:1000px;
     }
 
     .offerta-card img {
