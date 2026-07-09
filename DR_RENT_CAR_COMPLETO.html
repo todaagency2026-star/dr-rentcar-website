@@ -2941,9 +2941,79 @@ footer {
     }
 
     @media(max-width:768px) {
-      #offerte { padding:4rem 2rem; }
-      .offerta-card { width:clamp(280px,75vw,400px); height:380px; }
-      #offerte-prev, #offerte-next { width:48px; height:48px; font-size:1.2rem; padding:0; }
+      #offerte { padding:3rem 1.5rem; }
+
+      #offerte-carousel {
+        padding:20px 50px !important;
+        border-radius:16px;
+      }
+
+      #offerte-track {
+        gap:16px;
+        padding:15px 0;
+      }
+
+      .offerta-card {
+        width:clamp(240px,85vw,320px);
+        height:360px;
+        border-radius:14px;
+      }
+
+      .offerta-card img {
+        padding:15px;
+      }
+
+      #offerte-prev, #offerte-next {
+        width:44px;
+        height:44px;
+        font-size:1.1rem;
+        left:8px;
+        right:8px;
+      }
+
+      #offerte-next { right:8px; }
+
+      .section-title { font-size:1.8rem; margin-bottom:2rem; }
+
+      #offerte-dots { gap:8px; margin-top:1.5rem; }
+    }
+
+    @media(max-width:480px) {
+      #offerte { padding:2.5rem 1rem; }
+
+      #offerte-carousel {
+        padding:15px 40px !important;
+      }
+
+      #offerte-track {
+        gap:12px;
+        padding:12px 0;
+      }
+
+      .offerta-card {
+        width:clamp(200px,90vw,280px);
+        height:320px;
+        border-radius:12px;
+      }
+
+      .offerta-card img {
+        padding:12px;
+      }
+
+      #offerte-prev, #offerte-next {
+        width:40px;
+        height:40px;
+        font-size:1rem;
+      }
+
+      .section-title { font-size:1.5rem; margin-bottom:1.5rem; }
+
+      .offerte-dot {
+        width:10px;
+        height:10px;
+      }
+
+      #offerte-dots { gap:6px; margin-top:1.2rem; }
     }
   </style>
 </section>
