@@ -2832,6 +2832,68 @@ footer {
   </div>
 </section>
 
+<!-- ═══ 🆕 LE NOSTRE OFFERTE - CAROUSEL 🆕 ═══ -->
+<section id="offerte" style="padding: 6rem 4rem; background: var(--dark); position: relative; overflow: hidden;">
+  <div class="container">
+    <div class="offerte-intro reveal">
+      <div class="section-label">Scopri le proposizioni</div>
+      <h2 class="section-title">LE NOSTRE <span>OFFERTE</span></h2>
+      <p style="color:var(--gray);font-family:var(--font-head);font-weight:300;max-width:600px;">Seleziona il veicolo perfetto per le tue esigenze. Offerte su misura, servizi inclusi, ritmo di pagamento conveniente.</p>
+    </div>
+
+    <div class="offerte-carousel-wrap" style="position:relative;margin-top:3rem;border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.03);padding:20px;border:1px solid rgba(208,2,27,0.2);">
+      <div class="offerte-carousel" id="offerte-carousel" style="position:relative;width:100%;overflow:hidden;border-radius:12px;background:var(--dark-2);">
+        <div class="offerte-track" id="offerte-track" style="display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding:12px;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;">
+          <!-- Le immagini vengono caricate via JavaScript -->
+        </div>
+      </div>
+      <button class="offerte-btn offerte-prev" id="offerte-prev" aria-label="Precedente" style="position:absolute;top:50%;transform:translateY(-50%);left:20px;width:48px;height:48px;border-radius:50%;background:var(--red);border:1.5px solid var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;color:#fff;z-index:20;transition:all 0.3s;font-weight:700;">❮</button>
+      <button class="offerte-btn offerte-next" id="offerte-next" aria-label="Prossima" style="position:absolute;top:50%;transform:translateY(-50%);right:20px;width:48px;height:48px;border-radius:50%;background:var(--red);border:1.5px solid var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;color:#fff;z-index:20;transition:all 0.3s;font-weight:700;">❯</button>
+    </div>
+  </div>
+
+  <style>
+    .offerte-track::-webkit-scrollbar { display:none; }
+    .offerte-item {
+      flex-shrink:0;
+      width:clamp(280px,32vw,420px);
+      height:auto;
+      border-radius:12px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:transform 0.3s var(--transition),box-shadow 0.3s;
+      scroll-snap-align:start;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    }
+    .offerte-item:hover {
+      transform:translateY(-8px);
+      box-shadow:0 12px 32px rgba(208,2,27,0.4);
+    }
+    .offerte-item img {
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      border-radius:12px;
+    }
+    .offerte-btn:hover {
+      transform:translateY(-50%) scale(1.15);
+      box-shadow:0 0 30px rgba(208,2,27,0.6);
+      background:var(--red-light);
+    }
+    .offerte-btn:active {
+      transform:translateY(-50%) scale(0.95);
+    }
+    @media(max-width:768px) {
+      #offerte { padding:4rem 2rem; }
+      .offerte-item { width:clamp(220px,65vw,300px); }
+      .offerte-btn { width:40px; height:40px; font-size:1rem; }
+      .offerte-prev { left:12px; }
+      .offerte-next { right:12px; }
+    }
+  </style>
+</section>
+
 <!-- ═══ 🆕 SOCIAL MEDIA (ICONE REALI ED EFFETTI) 🆕 ═══ -->
 <section id="social">
   <div class="container">
@@ -3253,6 +3315,51 @@ window.addEventListener('scroll', () => {
       submitBtn.disabled = false;
     }
   });
+})();
+
+/* ════════════════════════════════════════
+   🆕 LE NOSTRE OFFERTE - CAROUSEL MANAGER 🆕
+════════════════════════════════════════ */
+(function initOffertesCarousel(){
+  const carousel=document.getElementById('offerte-carousel');
+  const track=document.getElementById('offerte-track');
+  const prevBtn=document.getElementById('offerte-prev');
+  const nextBtn=document.getElementById('offerte-next');
+  if(!carousel||!track)return;
+  const offertesImages=['Aggiungi un titolo.png','Progetto senza titolo (10).png','Progetto senza titolo (11).png','Progetto senza titolo (12).png','Progetto senza titolo (13).png','Progetto senza titolo (14).png','Progetto senza titolo (15).png','Progetto senza titolo (16).png','Progetto senza titolo (17).png','Progetto senza titolo (18).png','Progetto senza titolo (19).png','Progetto senza titolo (20).png','Progetto senza titolo (21).png','Progetto senza titolo (22).png','Progetto senza titolo (23).png','Progetto senza titolo (24).png','Progetto senza titolo (3).png','Progetto senza titolo (4).png','Progetto senza titolo (5).png','Progetto senza titolo (6).png','Progetto senza titolo (7).png','Progetto senza titolo (8).png','Progetto senza titolo (9).png','progetto senza titolo 25.jpeg','progetto senza titolo 26.jpeg','progetto senza titolo 27.jpeg'];
+  const imgPath='./images/offerte/';
+  offertesImages.forEach((img,idx)=>{
+    const item=document.createElement('div');
+    item.className='offerte-item';
+    item.innerHTML=`<img src="${imgPath}${img}" alt="Offerta ${idx+1}" loading="lazy" decoding="async">`;
+    track.appendChild(item);
+  });
+  let autoScrollInterval;
+  const autoScrollDelay=5000;
+  const scrollAmount=400;
+  function startAutoScroll(){
+    autoScrollInterval=setInterval(()=>{
+      track.scrollBy({left:scrollAmount,behavior:'smooth'});
+    },autoScrollDelay);
+  }
+  function stopAutoScroll(){
+    clearInterval(autoScrollInterval);
+  }
+  prevBtn.addEventListener('click',()=>{
+    stopAutoScroll();
+    track.scrollBy({left:-scrollAmount,behavior:'smooth'});
+    startAutoScroll();
+  });
+  nextBtn.addEventListener('click',()=>{
+    stopAutoScroll();
+    track.scrollBy({left:scrollAmount,behavior:'smooth'});
+    startAutoScroll();
+  });
+  carousel.addEventListener('mouseenter',stopAutoScroll);
+  carousel.addEventListener('mouseleave',startAutoScroll);
+  carousel.addEventListener('touchstart',stopAutoScroll);
+  carousel.addEventListener('touchend',()=>{setTimeout(startAutoScroll,500)});
+  startAutoScroll();
 })();
 </script>
 
