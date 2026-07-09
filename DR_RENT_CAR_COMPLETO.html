@@ -2834,60 +2834,127 @@ footer {
 
 <!-- ═══ 🆕 LE NOSTRE OFFERTE - CAROUSEL 🆕 ═══ -->
 <section id="offerte" style="padding: 6rem 4rem; background: var(--dark); position: relative; overflow: hidden;">
-  <div class="container">
-    <div class="offerte-intro reveal">
+  <!-- Background animation -->
+  <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 50%, rgba(208,2,27,0.1) 0%, transparent 50%),radial-gradient(circle at 80% 50%, rgba(14,67,148,0.1) 0%, transparent 50%);pointer-events:none;"></div>
+
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="offerte-intro reveal" style="animation:fadeInUp 1s var(--ease) forwards;opacity:0;">
       <div class="section-label">Scopri le proposizioni</div>
       <h2 class="section-title">LE NOSTRE <span>OFFERTE</span></h2>
       <p style="color:var(--gray);font-family:var(--font-head);font-weight:300;max-width:600px;">Seleziona il veicolo perfetto per le tue esigenze. Offerte su misura, servizi inclusi, ritmo di pagamento conveniente.</p>
     </div>
 
-    <div class="offerte-carousel-wrap" style="position:relative;margin-top:3rem;border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.03);padding:20px;border:1px solid rgba(208,2,27,0.2);">
-      <div class="offerte-carousel" id="offerte-carousel" style="position:relative;width:100%;overflow:hidden;border-radius:12px;background:var(--dark-2);">
-        <div class="offerte-track" id="offerte-track" style="display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding:12px;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;">
+    <div class="offerte-carousel-wrap" style="position:relative;margin-top:3rem;border-radius:16px;overflow:hidden;background:linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);padding:24px;border:1px solid rgba(208,2,27,0.3);backdrop-filter:blur(20px);animation:scaleIn 0.8s var(--ease) 0.2s forwards;opacity:0;box-shadow:0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.1);">
+      <!-- Loading indicator -->
+      <div id="offerte-loader" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:100;display:none;">
+        <div style="width:50px;height:50px;border:3px solid rgba(208,2,27,0.2);border-top-color:var(--red);border-radius:50%;animation:spin 1s linear infinite;"></div>
+      </div>
+
+      <div class="offerte-carousel" id="offerte-carousel" style="position:relative;width:100%;overflow:hidden;border-radius:12px;background:var(--dark-2);min-height:400px;">
+        <div class="offerte-track" id="offerte-track" style="display:flex;gap:24px;overflow-x:auto;scroll-behavior:smooth;padding:16px;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;">
           <!-- Le immagini vengono caricate via JavaScript -->
         </div>
       </div>
-      <button class="offerte-btn offerte-prev" id="offerte-prev" aria-label="Precedente" style="position:absolute;top:50%;transform:translateY(-50%);left:20px;width:48px;height:48px;border-radius:50%;background:var(--red);border:1.5px solid var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;color:#fff;z-index:20;transition:all 0.3s;font-weight:700;">❮</button>
-      <button class="offerte-btn offerte-next" id="offerte-next" aria-label="Prossima" style="position:absolute;top:50%;transform:translateY(-50%);right:20px;width:48px;height:48px;border-radius:50%;background:var(--red);border:1.5px solid var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;color:#fff;z-index:20;transition:all 0.3s;font-weight:700;">❯</button>
+
+      <!-- Prev/Next buttons with glow effect -->
+      <button class="offerte-btn offerte-prev" id="offerte-prev" aria-label="Precedente" style="position:absolute;top:50%;transform:translateY(-50%);left:20px;width:56px;height:56px;border-radius:50%;background:var(--red);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;color:#fff;z-index:20;transition:all 0.35s var(--ease);font-weight:700;box-shadow:0 4px 16px rgba(208,2,27,0.4);backdrop-filter:blur(10px);">❮</button>
+      <button class="offerte-btn offerte-next" id="offerte-next" aria-label="Prossima" style="position:absolute;top:50%;transform:translateY(-50%);right:20px;width:56px;height:56px;border-radius:50%;background:var(--red);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;color:#fff;z-index:20;transition:all 0.35s var(--ease);font-weight:700;box-shadow:0 4px 16px rgba(208,2,27,0.4);backdrop-filter:blur(10px);">❯</button>
+
+      <!-- Scroll indicator -->
+      <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:15;">
+        <div id="offerte-dots"></div>
+      </div>
     </div>
   </div>
 
   <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes slideLeft { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideRight { from { transform: translateX(-40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
     .offerte-track::-webkit-scrollbar { display:none; }
+
     .offerte-item {
       flex-shrink:0;
       width:clamp(280px,32vw,420px);
-      height:auto;
-      border-radius:12px;
+      height:380px;
+      border-radius:14px;
       overflow:hidden;
       cursor:pointer;
-      transition:transform 0.3s var(--transition),box-shadow 0.3s;
+      transition:all 0.4s var(--ease);
       scroll-snap-align:start;
-      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+      box-shadow:0 8px 24px rgba(0,0,0,0.4);
+      border:1px solid rgba(208,2,27,0.2);
+      position:relative;
+      animation:slideLeft 0.6s var(--ease) backwards;
     }
+
+    .offerte-item:nth-child(1) { animation-delay:0.1s; }
+    .offerte-item:nth-child(2) { animation-delay:0.2s; }
+    .offerte-item:nth-child(3) { animation-delay:0.3s; }
+
     .offerte-item:hover {
-      transform:translateY(-8px);
-      box-shadow:0 12px 32px rgba(208,2,27,0.4);
+      transform:translateY(-12px) scale(1.02);
+      box-shadow:0 16px 48px rgba(208,2,27,0.5),inset 0 1px 0 rgba(255,255,255,0.2);
+      border-color:rgba(208,2,27,0.5);
     }
+
     .offerte-item img {
       width:100%;
       height:100%;
       display:block;
-      object-fit:cover;
+      object-fit:contain;
+      object-position:center;
+      padding:12px;
+      background:var(--dark-3);
       border-radius:12px;
+      transition:all 0.4s var(--ease);
     }
+
+    .offerte-item:hover img {
+      transform:scale(1.05);
+    }
+
+    .offerte-btn {
+      transition:all 0.35s var(--ease);
+    }
+
     .offerte-btn:hover {
-      transform:translateY(-50%) scale(1.15);
-      box-shadow:0 0 30px rgba(208,2,27,0.6);
+      transform:translateY(-50%) scale(1.2);
+      box-shadow:0 0 40px rgba(208,2,27,0.8),0 0 80px rgba(208,2,27,0.4);
       background:var(--red-light);
+      border-color:var(--red-light);
     }
+
     .offerte-btn:active {
-      transform:translateY(-50%) scale(0.95);
+      transform:translateY(-50%) scale(1.05);
     }
+
+    .offerte-dot {
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:rgba(208,2,27,0.3);
+      cursor:pointer;
+      transition:all 0.3s;
+    }
+
+    .offerte-dot.active {
+      background:var(--red);
+      transform:scale(1.3);
+      box-shadow:0 0 12px rgba(208,2,27,0.6);
+    }
+
+    @media(max-width:1024px) {
+      .offerte-item { width:clamp(260px,40vw,380px); height:340px; }
+    }
+
     @media(max-width:768px) {
       #offerte { padding:4rem 2rem; }
-      .offerte-item { width:clamp(220px,65vw,300px); }
-      .offerte-btn { width:40px; height:40px; font-size:1rem; }
+      .offerte-carousel-wrap { padding:16px; }
+      .offerte-item { width:clamp(220px,70vw,300px); height:300px; }
+      .offerte-btn { width:44px; height:44px; font-size:1rem; }
       .offerte-prev { left:12px; }
       .offerte-next { right:12px; }
     }
@@ -3325,41 +3392,127 @@ window.addEventListener('scroll', () => {
   const track=document.getElementById('offerte-track');
   const prevBtn=document.getElementById('offerte-prev');
   const nextBtn=document.getElementById('offerte-next');
+  const loader=document.getElementById('offerte-loader');
+  const dotsContainer=document.getElementById('offerte-dots');
+
   if(!carousel||!track)return;
+
   const offertesImages=['Aggiungi un titolo.png','Progetto senza titolo (10).png','Progetto senza titolo (11).png','Progetto senza titolo (12).png','Progetto senza titolo (13).png','Progetto senza titolo (14).png','Progetto senza titolo (15).png','Progetto senza titolo (16).png','Progetto senza titolo (17).png','Progetto senza titolo (18).png','Progetto senza titolo (19).png','Progetto senza titolo (20).png','Progetto senza titolo (21).png','Progetto senza titolo (22).png','Progetto senza titolo (23).png','Progetto senza titolo (24).png','Progetto senza titolo (3).png','Progetto senza titolo (4).png','Progetto senza titolo (5).png','Progetto senza titolo (6).png','Progetto senza titolo (7).png','Progetto senza titolo (8).png','Progetto senza titolo (9).png','progetto senza titolo 25.jpeg','progetto senza titolo 26.jpeg','progetto senza titolo 27.jpeg'];
   const imgPath='./images/offerte/';
+  let loadedImages=0;
+  let autoScrollInterval;
+  const autoScrollDelay=5500;
+  const scrollAmount=420;
+  let currentIndex=0;
+
+  // Mostra loader
+  if(loader) loader.style.display='flex';
+
+  // Carica immagini con ottimizzazione
   offertesImages.forEach((img,idx)=>{
     const item=document.createElement('div');
     item.className='offerte-item';
-    item.innerHTML=`<img src="${imgPath}${img}" alt="Offerta ${idx+1}" loading="lazy" decoding="async">`;
+    item.setAttribute('data-index',idx);
+
+    const imgEl=document.createElement('img');
+    imgEl.src=imgPath+img;
+    imgEl.alt='Offerta '+(idx+1);
+    imgEl.loading='lazy';
+    imgEl.decoding='async';
+
+    // Preload delle prime 3 immagini
+    if(idx<3){
+      imgEl.loading='eager';
+      imgEl.decoding='sync';
+    }
+
+    imgEl.onload=()=>{
+      loadedImages++;
+      // Nascondi loader quando tutte le immagini sono caricate
+      if(loadedImages===offertesImages.length && loader){
+        loader.style.display='none';
+      }
+    };
+
+    imgEl.onerror=()=>{
+      loadedImages++;
+      if(loadedImages===offertesImages.length && loader){
+        loader.style.display='none';
+      }
+    };
+
+    item.appendChild(imgEl);
     track.appendChild(item);
+
+    // Crea dot indicator
+    if(dotsContainer){
+      const dot=document.createElement('div');
+      dot.className='offerte-dot'+(idx===0?' active':'');
+      dot.onclick=()=>scrollToIndex(idx);
+      dotsContainer.appendChild(dot);
+    }
   });
-  let autoScrollInterval;
-  const autoScrollDelay=5000;
-  const scrollAmount=400;
+
+  // Aggiorna dots quando scrolla
+  function updateDots(){
+    const dots=dotsContainer?.querySelectorAll('.offerte-dot');
+    if(!dots) return;
+    dots.forEach((dot,idx)=>{
+      dot.classList.toggle('active',idx===currentIndex);
+    });
+  }
+
+  // Scroll to specific index
+  function scrollToIndex(idx){
+    currentIndex=idx;
+    const itemWidth=track.children[0]?.offsetWidth+24||440;
+    track.scrollBy({left:(itemWidth*idx)-track.scrollLeft,behavior:'smooth'});
+    updateDots();
+  }
+
+  // Auto-scroll con pause
   function startAutoScroll(){
     autoScrollInterval=setInterval(()=>{
-      track.scrollBy({left:scrollAmount,behavior:'smooth'});
+      currentIndex=(currentIndex+1)%offertesImages.length;
+      scrollToIndex(currentIndex);
     },autoScrollDelay);
   }
+
   function stopAutoScroll(){
     clearInterval(autoScrollInterval);
   }
+
+  // Button listeners
   prevBtn.addEventListener('click',()=>{
     stopAutoScroll();
-    track.scrollBy({left:-scrollAmount,behavior:'smooth'});
+    currentIndex=(currentIndex-1+offertesImages.length)%offertesImages.length;
+    scrollToIndex(currentIndex);
     startAutoScroll();
   });
+
   nextBtn.addEventListener('click',()=>{
     stopAutoScroll();
-    track.scrollBy({left:scrollAmount,behavior:'smooth'});
+    currentIndex=(currentIndex+1)%offertesImages.length;
+    scrollToIndex(currentIndex);
     startAutoScroll();
   });
+
+  // Pause on hover/touch
   carousel.addEventListener('mouseenter',stopAutoScroll);
   carousel.addEventListener('mouseleave',startAutoScroll);
   carousel.addEventListener('touchstart',stopAutoScroll);
-  carousel.addEventListener('touchend',()=>{setTimeout(startAutoScroll,500)});
-  startAutoScroll();
+  carousel.addEventListener('touchend',()=>{setTimeout(startAutoScroll,800)});
+
+  // Inizio auto-scroll dopo 2 secondi
+  setTimeout(startAutoScroll,2000);
+
+  // Aggiorna dots quando l'utente scrolla manualmente
+  track.addEventListener('scroll',()=>{
+    const scrollLeft=track.scrollLeft;
+    const itemWidth=track.children[0]?.offsetWidth+24||440;
+    currentIndex=Math.round(scrollLeft/itemWidth);
+    updateDots();
+  });
 })();
 </script>
 
