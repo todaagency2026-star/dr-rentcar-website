@@ -514,23 +514,30 @@ body {
   transform: translateY(-3px);
 }
 
+@keyframes offerteFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.02); }
+}
+
 .btn-offerte {
   position: relative;
   overflow: hidden;
-  transition: all 0.3s var(--ease) !important;
+  transition: all 0.4s var(--ease) !important;
+  animation: offerteFloat 3s ease-in-out infinite !important;
 }
 .btn-offerte::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.2);
-  transform: translateX(-100%) skewX(-15deg);
-  transition: transform 0.4s ease;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: translateX(-100%) skewX(-20deg);
+  transition: transform 0.5s ease;
 }
-.btn-offerte:hover::before { transform: translateX(100%) skewX(-15deg); }
+.btn-offerte:hover::before { transform: translateX(100%) skewX(-20deg); }
 .btn-offerte:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 10px 30px rgba(255,165,0,0.5) !important;
+  transform: translateY(-8px) scale(1.08) !important;
+  box-shadow: 0 20px 50px rgba(255,165,0,0.7) !important;
+  animation: none !important;
 }
 
 /* Google Review Button - Enhanced */
